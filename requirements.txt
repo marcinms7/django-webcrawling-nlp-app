@@ -1,0 +1,8 @@
+numpy
+pandas
+gevent
+b4
+django
+psycopg2
+selenium
+webdriver-manager

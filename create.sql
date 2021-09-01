@@ -1,0 +1,3 @@
+CREATE USER default;
+CREATE DATABASE gamesdata;
+GRANT ALL PRIVILEGES ON DATABASE docker TO docker;

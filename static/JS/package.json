@@ -1,0 +1,22 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api_request.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "na"
+  },
+  "keywords": [
+    "nlp"
+  ],
+  "author": "Marcin",
+  "license": "ISC",
+  “Type” : “module”,
+
+
+
+}
