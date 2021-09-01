@@ -19,10 +19,15 @@ Currently I train the model by picking positive/negative comments, which is taki
 
 
 To do:
+
 -fix gevent's monkey_patching (although looking online seems like a common problem, might not be solvable)
+
 -add more sources 
+
 -improve front end
+
 -train model (in progress!!)
+
 -dockerise 
 
 
