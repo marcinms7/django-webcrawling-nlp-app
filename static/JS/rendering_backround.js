@@ -1,3 +1,5 @@
+//Module rendering backround for semi-transparent box
+
 $(function() {
   function render() {
     $('.bg').removeAttr('style').css({
@@ -12,5 +14,3 @@ $(function() {
   // When the window resizes, or the `.box` moves/resizes, recall the `render` function.
   $(window).resize(render);
 });
-
-console.log("WORKEEEDDDDSFDSFFDFFFDS")

@@ -1,3 +1,5 @@
+# Author : Marcin Swierczewski
+
 # import os
 # import re
 # import sys
@@ -26,7 +28,7 @@
 #         parser : TYPE, optional
 #             DESCRIPTION. The default is 'html.parser'.
 #             You can use lxml or others too
-#         threading_switch: in the task I've been asked to use gevent, which 
+#         threading_switch: in the task I've tried to use gevent, which 
 #             would be good library for concurrency, yet the task could be 
 #             faster using threading. I have combined those, and it works fairly well
 #             on the bigger websites (for smaller it iterates too fast and can

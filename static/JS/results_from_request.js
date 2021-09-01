@@ -1,8 +1,16 @@
-// Getting saved request item
-var item_id = window.localStorage.getItem('requestQueue')
+//**************************
+//This module fetches another API request using my free credentials from RAWG API, based on 
+//the clicked game.
+//
+//It uses the game stored in cache to make that request. Another request is required to 
+//access separate page of the API, that contains more information about the game. 
+//
+//It then uses Ajax, to synchroniously send it back to views, to create HTML code to
+//populate all the information inside the box. 
+//**************************
 
-console.log("ITEM IS ")
-console.log(item_id)
+// Getting previously saved request item
+var item_id = window.localStorage.getItem('requestQueue')
 
 // getting request for reddit page
 let key = "?key=cef45661b4354e669cac1b77d398b285"
@@ -24,10 +32,7 @@ var requestOptions = {
   fetch(api + item_id_string + key , requestOptions)
   .then(response => response.json())
   .then(result => {
-  	console.log("REquest");
-  	console.log(result);
-    console.log("img");
-    console.log(result.background_image);
+
     document.body.style.backgroundImage = "url('" + result.background_image.toString() + "')"
     document.getElementsByClassName("bg")[0].style.background = "url('" + result.background_image.toString() + "')"
     document.getElementById("h1_id").innerHTML = result.name
@@ -38,7 +43,7 @@ var requestOptions = {
 
 
 
-
+//creating HTML button and inputting it inside submit form, inside our box div class
 let btn = document.createElement("button");
 btn.innerHTML = "Run NLP algorithm!";
 // btn.type = "submit";
@@ -60,6 +65,8 @@ btn.addEventListener("click", function () {
 
 
 // generating cookie for csrftoken and sending request
+//alternatively, csrf can be switched off in the browser, by using this 
+//function is better and does not require anything from the user.
 function getCookie(name) {
       let cookieValue = null;
       if (document.cookie && document.cookie !== '') {
@@ -76,17 +83,18 @@ function getCookie(name) {
       return cookieValue;
   }
 const csrftoken = getCookie('csrftoken');
-
+//sending all requests back to views 
 var send = result
     $.ajax({
+      //this is set to false, to allow ajax send the requests synchroniosuly.
+      //this might be a bad practice, could be changed in next version of the app
           async: false,
-
-        method: 'POST',
-        url: '',
+        method: 'POST', //sending post to views
+        url: '', //current path
       headers:{
           'Accept': 'application/json',
           'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-          'X-CSRFToken': csrftoken,
+          'X-CSRFToken': csrftoken,//setting csrf token from getCokie method
   },
         data: {'yourJavaScriptArrayKey': send,
                   // 'csrfmiddlewaretoken': '{{ csrf_token }}'
@@ -103,12 +111,6 @@ var send = result
              console.log(csrftoken)
         }
     });
-
-
-
-
-
-
 
   })
   .catch(error => console.log('error', error));

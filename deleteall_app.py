@@ -1,3 +1,9 @@
+'''
+This module can be run with python3 deleteall_app.py , uncommenting
+whichever table you'd like to destroy. 
+It was use for testing, experiments etc during the implementation. 
+'''
+
 import os 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "NLP_games.settings")
 

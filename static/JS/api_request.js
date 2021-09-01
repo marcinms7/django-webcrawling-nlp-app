@@ -1,14 +1,20 @@
+//**************************
+//This module fetches the API request using my free credentials from RAWG API, based on 
+//the seached title. 
+//
+//It then uses Ajax, to synchroniously send it back to views, to create HTML code with a 
+//list of games that would have the most similar name to the search.  
+//**************************
+
 
 console.log("START")
 // grabing search button
 var x = document.querySelector('.search');
-
 const s_button = document.querySelector('.s_button');
-// settting url for search 
+// settting url for search, based on my free RAWG credentials
 let key = "?key=cef45661b4354e669cac1b77d398b285"
 let api = "https://api.rawg.io/api/games"
 var searching = "&search=" + x
-
 
 // setting search options
 var myHeaders = new Headers();
@@ -23,12 +29,9 @@ var id = ""
 var htmlname = ""
 
 
-
-
 // for click button it loops through the game titles and populates them with fetched names
   s_button.addEventListener('click', function(e){  
   var x = document.querySelector('#search');
-
 
   var searching = "&search=" + x.value
 // fetches by search
@@ -36,9 +39,7 @@ var htmlname = ""
   .then(response => response.json())
   .then(result => {
 
-
-
-
+//changing HTML to display first 9 games that are the most similar to searched title
     var list = result;
     for (let i = 1; i < 10; i++) { 
   console.log(result.results[i].name)
@@ -55,12 +56,9 @@ var htmlname = ""
 
 
 
-
-
-
-
-
-
+// get cookie used to pass csrf token while sending the POST back to views. 
+//alternatively, csrf can be switched off in the browser, by using this 
+//function is better and does not require anything from the user.
 function getCookie(name) {
       let cookieValue = null;
       if (document.cookie && document.cookie !== '') {
@@ -77,22 +75,22 @@ function getCookie(name) {
       return cookieValue;
   }
 const csrftoken = getCookie('csrftoken');
-
+//sending all requests back to views 
     for (let j = 1; j < 10; j++) { 
-
 var send = result.results[j]
 console.log("REQUEST:")
 // console.log(result.results[i])
 // $(document).ready(function() {
     $.ajax({
+      //this is set to false, to allow ajax send the requests synchroniosuly.
+      //this might be a bad practice, could be changed in next version of the app
           async: false,
-
-        method: 'POST',
-        url: '',
+        method: 'POST', //sending post to views
+        url: '', //current path
       headers:{
           'Accept': 'application/json',
           'X-Requested-With': 'XMLHttpRequest', //Necessary to work with request.is_ajax()
-          'X-CSRFToken': csrftoken,
+          'X-CSRFToken': csrftoken, //setting csrf token from getCokie method
   },
         data: {'yourJavaScriptArrayKey': send,
                   // 'csrfmiddlewaretoken': '{{ csrf_token }}'
@@ -111,8 +109,6 @@ console.log("REQUEST:")
     });
 // });
 };
-
-
 
 
     id = result.results[0]
